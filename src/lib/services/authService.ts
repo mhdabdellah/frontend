@@ -25,7 +25,7 @@ export const authService = {
     try {
       const response = await apiClient.post('auth/login', credentials);
       console.log("response.data: "+ response.data)
-      return response.data; // Assuming this returns a JWT token
+      return response.data;
     } catch (error) {
       console.error('Login error:', error);
       throw error;

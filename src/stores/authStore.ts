@@ -1,4 +1,3 @@
-// stores/authStore.ts
 import { create } from 'zustand';
 import { UserModel } from '@/models/userModel';
 
@@ -31,7 +30,6 @@ export const useAuthStore = create<AuthState>((set) => ({
   
   initializeAuth: () => {
     const token = localStorage.getItem('authToken');
-    // You might want to add token validation here
     set({ 
       token,
       isAuthenticated: !!token,

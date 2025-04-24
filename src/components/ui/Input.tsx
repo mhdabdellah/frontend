@@ -1,11 +1,9 @@
-// components/ui/Input.tsx
 import { forwardRef, useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
-  /** you can still override if needed */
   showToggle?: boolean;
 }
 
@@ -15,7 +13,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const shouldToggle = isPassword && (showToggle ?? true);
     const [visible, setVisible] = useState(false);
 
-    // if it's password+toggle, switch type on visibility
     const actualType =
       isPassword && shouldToggle ? (visible ? 'text' : 'password') : type;
 

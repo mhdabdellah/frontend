@@ -1,14 +1,12 @@
 const TableSearch = ({ value, onChange, placeholder }: { value: string; onChange: (val: string) => void; placeholder?: string }) => {
   return (
     <div className="relative">
-      {/* Prefix Image */}
       <img
-        src="/search.png" // Replace with your image path
+        src="/search.png"
         alt="prefix"
         className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5"
       />
       
-      {/* Input Field */}
       <input
         type="text"
         value={value}

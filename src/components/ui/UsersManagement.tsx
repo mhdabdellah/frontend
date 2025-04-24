@@ -136,7 +136,7 @@ const UsersManagement = () => {
             icon={FiFilter}
             onClick={() => setHiddenFilter(!hiddenFilter)}
             tooltip="Filter"
-            color="text-black" // Makes the icon black
+            color="text-black"
             size={22}
           />
 
@@ -154,7 +154,6 @@ const UsersManagement = () => {
         </div>
       </div>
 
-      {/* Filters */}
       {!hiddenFilter && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 p-4 bg-gray-50 rounded-lg">
           <div>

@@ -22,7 +22,6 @@ export const ChangeUsernameModal = ({
   const handleSubmit = async () => {
     const token = localStorage.getItem("authToken");
 
-    // Check if the token is missing or invalid
     if (!token) {
       toast.error("You must be logged in to change your username");
       return;
@@ -30,18 +29,14 @@ export const ChangeUsernameModal = ({
 
     try {
       setLoading(true);
-      // Log to debug values
-      console.log({ newUsername, username, token });
-
-      // Call changeUsername service
       await changeUsername(newUsername, token, username);
 
       toast.success("Username changed successfully");
-      onSuccess(); // Notify parent that the change was successful
-      onClose();   // Close the modal
+      onSuccess();
+      onClose();
     } catch (error) {
       toast.error("Failed to change username");
-      console.error(error); // Log any error for debugging
+      console.error(error);
     } finally {
       setLoading(false);
     }
@@ -63,7 +58,7 @@ export const ChangeUsernameModal = ({
           onClick={handleSubmit}
           variant="primary"
           className="w-full"
-          disabled={loading || !newUsername} // Disable if loading or no username
+          disabled={loading || !newUsername}
         >
           {loading ? "Updating..." : "Change Username"}
         </Button>

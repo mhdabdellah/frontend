@@ -22,6 +22,7 @@ interface UserFormProps {
   defaultValues?: Partial<UserFormValues>;
   onSubmit: SubmitHandler<UserFormValues>;
   submitLabel?: string;
+  isRegister?: number;
   onCancel?: () => void;
 }
 
@@ -30,6 +31,7 @@ export function UserForm({
   onSubmit,
   submitLabel = 'Submit',
   onCancel,
+  isRegister
 }: UserFormProps) {
   const {
     register,
@@ -62,7 +64,7 @@ export function UserForm({
         error={errors.role?.message}
       >
         <option value="USER">USER</option>
-        <option value="ADMIN">ADMIN</option>
+        {isRegister !== 1 && <option value="ADMIN">ADMIN</option>}
       </Selector>
 
 

@@ -27,7 +27,6 @@ interface User {
   };
 }
 
-// Validation Schemas
 const profileSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
   lastName: z.string().min(2, 'Last name must be at least 2 characters'),
@@ -166,7 +165,6 @@ export default function ProfilePage() {
   return (
     <Layout pageTitle="Profile">
       <div className="max-w-4xl mx-auto p-6 space-y-8">
-        {/* Display current username */}
         <div className="text-center">
           <h1 className="text-3xl text-black font-bold">Welcome, {user.username}!</h1>
         </div>

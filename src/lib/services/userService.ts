@@ -73,10 +73,6 @@ export const changePassword = async (
   token: string | null,
   username?: string | null
 ) => {
-  // const payload: any = {
-  //   oldPassword,
-  //   newPassword,
-  // };
   const payload: { oldPassword: string; newPassword: string } = {
     oldPassword,
     newPassword,
@@ -118,7 +114,7 @@ export const getCurrentUser = async (token: string | null) => {
       }
     });
 
-    return response.data; // Should be of type UserResponse
+    return response.data;
   } catch (error) {
     console.error("Failed to fetch current user", error);
     throw error;
