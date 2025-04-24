@@ -3,18 +3,15 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { deleteUser, fetchUsers } from "@/lib/services/userService";
-import { FaFilter, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { AiOutlineClear, AiOutlineLock, AiOutlineUser } from "react-icons/ai";
 import { UserModel } from "@/models/userModel";
-// import UserForm from "@/components/forms/UserForm";
 import Pagination from "@/components/data-display/Pagination";
 import Table from "@/components/data-display/Table";
 import TableSearch from "@/components/data-display/TableSearch";
 import { IconButton } from "@/components/ui/IconButton";
-import { FormModal } from "@/components/ui/FormModal";
 import { ChangePasswordModal } from "@/components/ui/ChangePasswordModal";
 import { ChangeUsernameModal } from "@/components/ui/ChangeUsernameModal";
-import { UserForm } from "../forms/UserForm";
 import { CreateUserModal } from "./CreateUserModal";
 import { FiFilter, FiPlus } from "react-icons/fi";
 

@@ -1,12 +1,8 @@
-// components/layout/Sidebar.tsx
 import { deleteUser } from '@/lib/services/userService';
 import Link from 'next/link';
 import {
   HiHome,
   HiUser,
-  HiChartBar,
-  HiCog,
-  HiLogout,
   HiTrash,
 } from 'react-icons/hi';
 
@@ -43,8 +39,6 @@ export function Sidebar() {
             <button
                 onClick={() => {
                 if (confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-                    // Delete account logic here
-                    console.log("Account deleted");
                     deleteUser(localStorage.getItem("authToken"))
                     localStorage.removeItem('authToken');
                     router.push('/login');

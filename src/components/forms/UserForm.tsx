@@ -1,16 +1,13 @@
-// components/forms/UserForm.tsx
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';                             // RHF core :contentReference[oaicite:3]{index=3}
-import { zodResolver } from '@hookform/resolvers/zod';                                // Zod resolver :contentReference[oaicite:4]{index=4}
+import { useForm, SubmitHandler } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
 import { Input } from '@/components/ui/Input';
 import { Selector } from '@/components/ui/Selector';
 import { Button } from '@/components/ui/Button';
 
-// 1️⃣ Shared schema for all user fields
 const userSchema = z.object({
-  username:  z.string().min(3,  'At least 3 characters'),                              // RHF + Zod example :contentReference[oaicite:5]{index=5}
+  username:  z.string().min(3,  'At least 3 characters'),
   password:  z.string().min(6,  'At least 6 characters'),
   role:      z.enum(['USER','ADMIN']),
   firstName: z.string().min(2),
@@ -22,8 +19,8 @@ const userSchema = z.object({
 export type UserFormValues = z.infer<typeof userSchema>;
 
 interface UserFormProps {
-  defaultValues?: Partial<UserFormValues>;                                            // Pre-fill for “edit” or admin form :contentReference[oaicite:6]{index=6}
-  onSubmit: SubmitHandler<UserFormValues>;                                            // Callback to invoke registration or admin API call :contentReference[oaicite:7]{index=7}
+  defaultValues?: Partial<UserFormValues>;
+  onSubmit: SubmitHandler<UserFormValues>;
   submitLabel?: string;
   onCancel?: () => void;
 }
@@ -45,7 +42,6 @@ export function UserForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 max-w-md mx-auto">
-      {/* Username & Password */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
           label="Username"
@@ -60,7 +56,6 @@ export function UserForm({
         />
       </div>
 
-      {/* Role selector */}
       <Selector
         label="Role"
         {...register('role')}
@@ -70,7 +65,7 @@ export function UserForm({
         <option value="ADMIN">ADMIN</option>
       </Selector>
 
-      {/* Name fields */}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Input
           label="First Name"
@@ -84,7 +79,6 @@ export function UserForm({
         />
       </div>
 
-      {/* Sex & Age */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Selector
           label="Sex"
@@ -102,7 +96,6 @@ export function UserForm({
         />
       </div>
 
-      {/* Email */}
       <Input
         label="Email"
         type="email"
@@ -110,7 +103,6 @@ export function UserForm({
         error={errors.email?.message}
       />
 
-      {/* Actions */}
       <div className="flex justify-end gap-3">
         {onCancel && (
           <Button variant="secondary" onClick={onCancel} disabled={isSubmitting}>

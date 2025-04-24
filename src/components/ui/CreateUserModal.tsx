@@ -17,6 +17,7 @@ export function CreateUserModal({ title, onClose, refreshUsers }: CreateUserModa
       refreshUsers();
       onClose();
     } catch (err) {
+      console.log(err)
       toast.error('Failed to create user');
     }
   };

@@ -73,7 +73,11 @@ export const changePassword = async (
   token: string | null,
   username?: string | null
 ) => {
-  const payload: any = {
+  // const payload: any = {
+  //   oldPassword,
+  //   newPassword,
+  // };
+  const payload: { oldPassword: string; newPassword: string } = {
     oldPassword,
     newPassword,
   };
@@ -92,7 +96,7 @@ export const changeUsername = async (
   token: string | null,
   username?: string | null
 ) => {
-  const payload: any = {
+  const payload: {newUsername: string;} = {
     newUsername,
   };
 

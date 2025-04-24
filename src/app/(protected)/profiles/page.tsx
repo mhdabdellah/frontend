@@ -15,7 +15,7 @@ import {
 } from '@/lib/services/userService';
 import Layout from '@/components/layout/Layout';
 
-// Define proper TypeScript interfaces
+
 interface User {
   username: string;
   profile: {
@@ -36,7 +36,6 @@ const profileSchema = z.object({
   sex: z.enum(['MALE', 'FEMALE']),
 });
 
-// Only newUsername is required for username change
 const usernameSchema = z.object({
   newUsername: z.string().min(3, 'Username must be at least 3 characters'),
 });
@@ -85,7 +84,6 @@ export default function ProfilePage() {
     register: passwordRegister,
     handleSubmit: handlePasswordSubmit,
     formState: { errors: passwordErrors },
-    reset: resetPassword,
   } = useForm<z.infer<typeof passwordSchema>>({
     resolver: zodResolver(passwordSchema),
   });

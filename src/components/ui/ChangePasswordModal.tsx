@@ -33,6 +33,7 @@ export const ChangePasswordModal = ({
       onSuccess();
       onClose();
     } catch (error) {
+      console.log(error)
       toast.error("Failed to change password");
     } finally {
       setLoading(false);
