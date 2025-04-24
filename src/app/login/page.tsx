@@ -9,6 +9,7 @@ import * as z from 'zod';
 import { authService } from '@/lib/services/authService';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { useState } from 'react';
 
 const loginSchema = z.object({
   username: z.string().min(3, 'Invalid username'),
@@ -19,17 +20,20 @@ export default function LoginPage() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(loginSchema)
   });
-  const { login, isLoading } = useAuthStore();
+  const { login } = useAuthStore();  // Remove isLoading from here
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);  // Add local loading state
 
   const onSubmit = async (data: { username: string; password: string }) => {
     try {
+      setIsLoading(true);  // Start loading
       const token = await authService.login(data);
-      console.log("token:"+token);
       login(token);
       router.push('/');
     } catch (error) {
       console.error('Login failed:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -77,14 +81,6 @@ export default function LoginPage() {
               autoComplete="current-password"
             />
           </div>
-
-          {/* <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Signing In...' : 'Sign In'}
-          </Button> */}
 
           <Button
             type="submit"
