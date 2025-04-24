@@ -1,3 +1,5 @@
+import { Profile } from "./profile";
+
 export interface UserModel {
     username: string;
     role: 'USER' | 'ADMIN';
