@@ -10,7 +10,7 @@ export default function RegisterPage() {
   const router = useRouter();
 
   const handleRegister = async (data: UserFormValues) => {
-    const { token } = await authService.register(data);                     // call public API :contentReference[oaicite:9]{index=9}
+    const { token } = await authService.register(data);
     login(token);
     router.push('/dashboard');
   };

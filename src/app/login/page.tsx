@@ -1,7 +1,7 @@
 "use client";
 
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/navigation';  // Changed import
+import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/stores/authStore';
 import Link from 'next/link';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,13 +20,13 @@ export default function LoginPage() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(loginSchema)
   });
-  const { login } = useAuthStore();  // Remove isLoading from here
+  const { login } = useAuthStore();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);  // Add local loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: { username: string; password: string }) => {
     try {
-      setIsLoading(true);  // Start loading
+      setIsLoading(true);
       const token = await authService.login(data);
       login(token);
       router.push('/');
