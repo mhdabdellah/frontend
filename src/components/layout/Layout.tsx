@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react';
 import { Navbar } from './Navbar';
 import { Sidebar } from './Sidebar';
+import { Footer } from './Footer';
 
 interface LayoutProps {
   children: ReactNode;
@@ -26,6 +27,7 @@ export default function Layout({ children, pageTitle }: LayoutProps) {
           onMenuClick={() => setSidebarOpen(!sidebarOpen)}
         />
         <main className="flex-1 overflow-auto p-6">{children}</main>
+        <Footer/>
       </div>
     </div>
   );

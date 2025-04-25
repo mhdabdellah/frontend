@@ -140,7 +140,11 @@ export default function ProfilePage() {
     const token = localStorage.getItem('authToken');
     if (!token) return;
     try {
-      await changePassword(data.currentPassword,data.newPassword,token);
+      await changePassword({
+        newPassword: data.newPassword,
+        token: token,
+        oldPassword: data.currentPassword,
+      });
       localStorage.removeItem('authToken');
       router.push('/login');
     } catch (error) {

@@ -10,10 +10,11 @@ import Pagination from "@/components/data-display/Pagination";
 import Table from "@/components/data-display/Table";
 import TableSearch from "@/components/data-display/TableSearch";
 import { IconButton } from "@/components/ui/IconButton";
-import { ChangePasswordModal } from "@/components/ui/ChangePasswordModal";
+// import { ChangePasswordModal } from "@/components/ui/ResetPasswordModal";
 import { ChangeUsernameModal } from "@/components/ui/ChangeUsernameModal";
 import { CreateUserModal } from "./CreateUserModal";
 import { FiFilter, FiPlus } from "react-icons/fi";
+import { ResetPasswordModal } from "./ResetPasswordModal";
 
 const UsersManagement = () => {
   const [data, setData] = useState<UserModel[]>([]);
@@ -191,7 +192,7 @@ const UsersManagement = () => {
       )}
 
       {showChangePasswordModal && selectedUser && (
-        <ChangePasswordModal 
+        <ResetPasswordModal 
           username={selectedUser.username}
           onClose={() => setShowChangePasswordModal(false)} 
           onSuccess={fetchUsersData}

@@ -1,6 +1,14 @@
 import { UserUpdateDTO } from "@/models/UserUpdateDTO";
 import apiClient from "../axios";
 
+interface ChangePasswordParams {
+  newPassword: string;
+  token: string | null;
+  oldPassword?: string;
+  username?: string;
+}
+
+
 export const fetchUsers = async (
   page: number,
   search: string,
@@ -67,25 +75,87 @@ export const checkUserRole = async (token: string | null): Promise<boolean> =>  
   }
 };
 
-export const changePassword = async (
-  oldPassword: string,
-  newPassword: string,
-  token: string | null,
-  username?: string | null
-) => {
-  const payload: { oldPassword: string; newPassword: string } = {
-    oldPassword,
-    newPassword,
-  };
+// export const changePassword = async (
+//   newPassword: string,
+//   token: string | null,
+//   oldPassword?: string,
+//   username?: string | null
+// ) => {
+//   const payload: { oldPassword: string; newPassword: string } = {
+//     if(oldPassword) {
+//       oldPassword,
+//     }
+//     newPassword,
+//   };
 
-  const url = username ? `admin/users/${username}` : `users`;
+//   const url = username ? `admin/users/${username}/reset-password` : `users/change-password`;
 
-  await apiClient.post(`${url}/change-password`, payload, {
+//   await apiClient.post(`${url}`, payload, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+// };
+
+
+
+export const changePassword = async (params: ChangePasswordParams) => {
+  const { newPassword, token, oldPassword, username } = params;
+
+  // Validate required parameters
+  if (!username && !oldPassword) {
+    throw new Error("Old password is required for non-admin password changes");
+  }
+
+  // Create appropriate payload based on user type
+  const payload = username
+    ? { newPassword }
+    : { 
+        oldPassword: oldPassword!,
+        newPassword
+      };
+
+  // Build the correct endpoint URL
+  const endpoint = username
+    ? `admin/users/${encodeURIComponent(username)}/reset-password`
+    : `users/change-password`;
+
+  // Execute the API request
+  await apiClient.post(endpoint, payload, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
+
+
+// export const changePassword = async (
+//   newPassword: string,
+//   token: string | null,
+//   oldPassword?: string,
+//   username?: string | null
+// ) => {
+//   if (!username && !oldPassword) {
+//     throw new Error("Old password is required for non-admin password changes");
+//   }
+
+//   const payload = username 
+//     ? { newPassword: newPassword }
+//     : { 
+//         oldPassword: oldPassword!,
+//         newPassword: newPassword 
+//       };
+
+//   const endpoint = username 
+//     ? `admin/users/${encodeURIComponent(username)}/reset-password`
+//     : `users/change-password`;
+
+//   await apiClient.post(endpoint, payload, {
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   });
+// };
 
 export const changeUsername = async (
   newUsername: string,

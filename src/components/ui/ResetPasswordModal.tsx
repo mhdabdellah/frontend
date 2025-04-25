@@ -5,36 +5,35 @@ import { toast } from "react-toastify";
 import { Input } from "./Input";
 import { Button } from "./Button";
 
-interface ChangePasswordModalProps {
+interface ResetPasswordModalProps {
   username: string;
   onClose: () => void;
   onSuccess: () => void;
 }
 
-export const ChangePasswordModal = ({
+
+export const ResetPasswordModal = ({
   username,
   onClose,
   onSuccess,
-}: ChangePasswordModalProps) => {
-  const [oldPassword, setOldPassword] = useState("");
+}: ResetPasswordModalProps) => {
   const [newPassword, setNewPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      await changePassword(
-        oldPassword,
-        newPassword,
-        localStorage.getItem("authToken"),
-        username
-      );
+      await changePassword({
+        newPassword: newPassword,
+        token: localStorage.getItem("authToken"),
+        username: username,
+      });
       toast.success("Password changed successfully");
       onSuccess();
       onClose();
     } catch (error) {
       console.log(error)
-      toast.error("Failed to change password");
+      toast.error("Failed to reset password");
     } finally {
       setLoading(false);
     }
@@ -42,17 +41,11 @@ export const ChangePasswordModal = ({
 
   return (
     <FormModal
-      title="Change Password"
+      title="Reset Password"
       setOpen={onClose}
       modalClassName="max-w-md"
     >
       <div className="space-y-4">
-        <Input
-          label="Old Password"
-          type="password"
-          value={oldPassword}
-          onChange={(e) => setOldPassword(e.target.value)}
-        />
         <Input
           label="New Password"
           type="password"
@@ -65,7 +58,7 @@ export const ChangePasswordModal = ({
           className="w-full"
           disabled={loading}
         >
-          {loading ? "Updating..." : "Change Password"}
+          {loading ? "Updating..." : "Reset Password"}
         </Button>
       </div>
     </FormModal>
